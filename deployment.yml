@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      name: mytemplate
+      labels:
+         app: swiggy
+
+    spec:
+      containers:
+        - name: cont1
+          image: nginx
+          volumeMounts:
+            - mountPath: /opt/cont1/
+              name: devops 
+
+        - name: cont2
+          image: httpd
+          command: ["/bin/bash", "-c", "while true; do echo happy pongal; sleep10; done"]
+          volumeMounts:
+            - mountPath: /opt/cont2/
+              name: devops
+
+
+
+      volumes:
+        - name: devops
+          emptyDir: {}   
+
+
+          
+
+
+    
+
+
+
+
+  
